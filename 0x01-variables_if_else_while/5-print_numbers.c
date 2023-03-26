@@ -11,14 +11,11 @@
 
 int main(void)
 {
-	char c;
+	int i;
 
-	for (c = 'a'; c <= 'z'; c++)
+	for (i = 0; i < 10; i++)
 	{
-		if (c != 'e' && c != 'q')
-		{
-			putchar(c);
-		}
+		putchar(i + 1);
 	}
 	putchar('\n');
 	return (0);
