@@ -3,44 +3,38 @@
 #include <stdlib.h>
 #include <time.h>
 
-void randomPasswordGeneration(int N)
-{
-	int i = 0;
-	int randomizer = 0;
+void randomPasswordGeneration() {
+  const char numbers[] = "0123456789";
+  const char lowercase[] = "abcdefghijklmnopqrstuvwxyz";
+  const char uppercase[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const char symbols[] = "!@#$%^&*()_-+={}[]\\|:;\"'<>,.?/";
 
-	srand((unsigned int)(time(NULL)));
+  const int N = 10;
+  char password[N + 1];
+  int i, rand_num;
 
-	char numbers[] = "0123456789";
-	char letter[] = "abcdefghijklmnoqprstuvwyzx";
-	char LETTER[] = "ABCDEFGHIJKLMNOQPRSTUYWVZX";
-	char symbols[] = "!@#$^&*?";
-	char password[N];
+  srand(time(NULL));
 
-	randomizer = rand() % 4;
+  for (i = 0; i < N; i++) {
+    rand_num = rand() % 4;
+    switch (rand_num) {
+      case 0:
+        password[i] = numbers[rand() % strlen(numbers)];
+        break;
+      case 1:
+        password[i] = lowercase[rand() % strlen(lowercase)];
+        break;
+      case 2:
+        password[i] = uppercase[rand() % strlen(uppercase)];
+        break;
+      case 3:
+        password[i] = symbols[rand() % strlen(symbols)];
+        break;
+    }
+  }
 
-	for (i = 0; i < N; i++) {
-
-		if (randomizer == 1) {
-			password[i] = numbers[rand() % 10];
-			randomizer = rand() % 4;
-			printf("%c", password[i]);
-		}
-		else if (randomizer == 2) {
-			password[i] = symbols[rand() % 8];
-			randomizer = rand() % 4;
-			printf("%c", password[i]);
-		}
-		else if (randomizer == 3) {
-			password[i] = LETTER[rand() % 26];
-			randomizer = rand() % 4;
-			printf("%c", password[i]);
-		}
-		else {
-			password[i] = letter[rand() % 26];
-			randomizer = rand() % 4;
-			printf("%c", password[i]);
-		}
-	}
+  password[N] = '\0';
+  printf("%s", password);
 }
 
 /**
