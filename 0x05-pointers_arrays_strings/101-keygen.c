@@ -1,25 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 #define PASSWORD_LENGTH 15
 
-void generate_password() {
-    const char charset[] = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    char password[PASSWORD_LENGTH + 1];
-    int i;
+void generate_password(char *password) {
+    const char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    int i, random_index;
     srand(time(NULL));
-    password[0] = 'A';
-    for (i = 1; i < PASSWORD_LENGTH - 1; i++) {
-        password[i] = charset[rand() % (sizeof(charset) - 1)];
+    for (i = 0; i < PASSWORD_LENGTH; i++) {
+        random_index = rand() % (sizeof(charset) - 1);
+        password[i] = charset[random_index];
     }
-    password[PASSWORD_LENGTH - 1] = 'q';
     password[PASSWORD_LENGTH] = '\0';
-    printf("%s\n", password);
 }
 
 int main() {
-    generate_password();
+    char password[PASSWORD_LENGTH + 1];
+    do {
+        generate_password(password);
+    } while (strcmp(password, "Tada! Congrats") != 0);
+    printf("%s\n", password);
     return 0;
 }
 
