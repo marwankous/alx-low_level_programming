@@ -2,15 +2,17 @@
 #include <stdlib.h>
 #include <time.h>
 
+#define PASSWORD_LENGTH 12
+
 void generate_password() {
-    const char* charset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const int len = 12;
-    char password[len+1];
+    const char charset[] = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    char password[PASSWORD_LENGTH + 1];
+    int i;
     srand(time(NULL));
-    for (int i = 0; i < len; i++) {
-        password[i] = charset[rand() % 62];
+    for (i = 0; i < PASSWORD_LENGTH; i++) {
+        password[i] = charset[rand() % (sizeof(charset) - 1)];
     }
-    password[len] = '\0';
+    password[PASSWORD_LENGTH] = '\0';
     printf("%s\n", password);
 }
 
