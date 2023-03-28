@@ -1,6 +1,47 @@
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
+void randomPasswordGeneration(int N)
+{
+	int i = 0;
+	int randomizer = 0;
+
+	srand((unsigned int)(time(NULL)));
+
+	char numbers[] = "0123456789";
+	char letter[] = "abcdefghijklmnoqprstuvwyzx";
+	char LETTER[] = "ABCDEFGHIJKLMNOQPRSTUYWVZX";
+	char symbols[] = "!@#$^&*?";
+	char password[N];
+
+	randomizer = rand() % 4;
+
+	for (i = 0; i < N; i++) {
+
+		if (randomizer == 1) {
+			password[i] = numbers[rand() % 10];
+			randomizer = rand() % 4;
+			printf("%c", password[i]);
+		}
+		else if (randomizer == 2) {
+			password[i] = symbols[rand() % 8];
+			randomizer = rand() % 4;
+			printf("%c", password[i]);
+		}
+		else if (randomizer == 3) {
+			password[i] = LETTER[rand() % 26];
+			randomizer = rand() % 4;
+			printf("%c", password[i]);
+		}
+		else {
+			password[i] = letter[rand() % 26];
+			randomizer = rand() % 4;
+			printf("%c", password[i]);
+		}
+	}
+}
 
 /**
  * main - generates a valid password for 101-crackme
@@ -8,48 +49,11 @@
  * Return: Always 0
  */
 
-int main(void)
+int main()
 {
-	int i, sum, diff, n;
-	char c;
+	int N = 10;
 
-	srand(time(NULL));
-	sum = 0;
-	i = 0;
-	while (sum < 2772 - 129)
-	{
-		n = rand() % 62;
-		if (n < 26)
-			c = 'a' + n;
-		else if (n < 52)
-			c = 'A' + (n - 26);
-		else
-			c = '0' + (n - 52);
+	randomPasswordGeneration(N);
 
-		sum += c;
-		putchar(c);
-		i++;
-	}
-	diff = 2772 - sum;
-    	if (diff < 26)
-		c = 'a' + diff;
-    	else if (diff < 52)
-		c = 'A' + (diff - 26);
-	else
-		c = '0' + (diff - 52);
-	putchar(c);
-	i++;
-
-	while (i < 63)
-	{
-		if (i % 2 == 0)
-			putchar('A' + (rand() % 26));
-		else
-			putchar('a' + (rand() % 26));
-		i++;
-	}
-
-	putchar('\n');
-	return (0);
+	return 0;
 }
-
