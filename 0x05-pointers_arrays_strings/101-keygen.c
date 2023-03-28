@@ -3,7 +3,7 @@
 #include <time.h>
 
 /**
- * main - generates random valid passwords for 101-crackme
+ * main - generates a valid password for 101-crackme
  *
  * Return: Always 0
  */
@@ -16,7 +16,7 @@ int main(void)
 	srand(time(NULL));
 	sum = 0;
 	i = 0;
-	while (sum < 2772 - 122)
+	while (sum < 2772 - 129)
 	{
 		n = rand() % 62;
 		if (n < 26)
@@ -31,14 +31,15 @@ int main(void)
 		i++;
 	}
 	diff = 2772 - sum;
-	if (diff < 26)
+    	if (diff < 26)
 		c = 'a' + diff;
-	else if (diff < 52)
+    	else if (diff < 52)
 		c = 'A' + (diff - 26);
 	else
 		c = '0' + (diff - 52);
 	putchar(c);
 	i++;
+
 	while (i < 63)
 	{
 		if (i % 2 == 0)
@@ -47,6 +48,8 @@ int main(void)
 			putchar('a' + (rand() % 26));
 		i++;
 	}
+
 	putchar('\n');
 	return (0);
 }
+
