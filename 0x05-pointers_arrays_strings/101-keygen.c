@@ -4,6 +4,7 @@
 #include <string.h>
 
 #define PASSWORD_LENGTH 15
+#define MAX_ATTEMPTS 1000
 
 void generate_password(char *password) {
     const char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -18,10 +19,16 @@ void generate_password(char *password) {
 
 int main() {
     char password[PASSWORD_LENGTH + 1];
+    int attempts = 0;
     do {
         generate_password(password);
-    } while (strcmp(password, "Tada! Congrats") != 0);
-    printf("%s\n", password);
+        attempts++;
+    } while (strcmp(password, "Tada! Congrats") != 0 && attempts < MAX_ATTEMPTS);
+    if (strcmp(password, "Tada! Congrats") == 0) {
+        printf("%s\n", password);
+    } else {
+        printf("Unable to generate password within %d attempts.\n", MAX_ATTEMPTS);
+    }
     return 0;
 }
 
