@@ -21,7 +21,7 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 
 	if (len + 1 > size_r)
 	{
-		return 0;
+		return (0);
 	}
 
 	r[len + 1] = '\0';
@@ -31,7 +31,7 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 		int digit1 = i >= 0 ? n1[i] - '0' : 0;
 		int digit2 = j >= 0 ? n2[j] - '0' : 0;
 		int sum = digit1 + digit2 + carry;
-		
+
 		carry = sum / 10;
 		r[k] = (sum % 10) + '0';
 	}
@@ -40,11 +40,11 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 	{
 		if (len + 2 > size_r)
 		{
-			return 0;
+			return (0);
 		}
 		r[0] = carry + '0';
-		return r;
+		return (r);
 	}
 
-	return r + 1;
+	return (r + 1);
 }
