@@ -3,33 +3,37 @@
 
 /**
  * main - prints the opcodes of its own main function
- * @argc: argument count
- * @argv: argument vector
+ * @argc: the number of arguments (should be 2)
+ * @argv: an array of strings containing the arguments
  *
- * Return: 0 on success, 1 on incorrect argument count, 2 on negative argument
+ * Return: always 0
  */
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
-	int num_bytes, i;
-	char *main_ptr;
+	int i, num_bytes;
 
 	if (argc != 2)
 	{
 		printf("Error\n");
-		return (1);
+		exit(1);
 	}
 
 	num_bytes = atoi(argv[1]);
+
 	if (num_bytes < 0)
 	{
 		printf("Error\n");
-		return (2);
+		exit(2);
 	}
 
-	main_ptr = (char *)main;
+	/* Print the opcodes */
+	unsigned char *p = (unsigned char *)main;
+
 	for (i = 0; i < num_bytes; i++)
 	{
-		printf("%02x", (unsigned char)main_ptr[i]);
+		printf("%02x", *(p + i));
+		if (i < num_bytes - 1)
+			printf(" ");
 	}
 	printf("\n");
 
